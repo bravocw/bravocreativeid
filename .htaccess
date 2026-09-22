@@ -1,0 +1,14 @@
+# <IfModule mod_rewrite.c> 
+#     RewriteEngine On
+#     # Force SSL
+#     RewriteCond %{HTTPS} !=on
+#     RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+#     # Rewrite to the 'public' folder
+#     RewriteRule ^$ public/ [L]
+#     RewriteRule (.*) public/$1 [L]
+#     # Add this line to address the Authorization header issue
+#     SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+# </IfModule>
+RewriteEngine on
+RewriteCond %{REQUEST_URI} !^public
+RewriteRule ^(.*)$ public/$1 [L]
